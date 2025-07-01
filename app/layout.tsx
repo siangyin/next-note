@@ -16,6 +16,20 @@ export const metadata: Metadata = {
   title: 'Next Note',
   description:
     'Next Note is a simple and clean note-taking app that helps you capture thoughts, ideas, and to-dos — all in one place.',
+  icons: {
+    icon: [
+      {
+        media: '(prefers-color-scheme: light',
+        url: '/logo.svg',
+        href: '/logo.svg',
+      },
+      {
+        media: '(prefers-color-scheme: dark',
+        url: '/logo-dark.svg',
+        href: '/logo-dark.svg',
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
@@ -25,6 +39,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
+      <head>
+        <link rel='icon' type='image/png' href='/logo.png' sizes='any' />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
