@@ -17,7 +17,7 @@ export const Heading = () => {
       </h3>
 
       <Button>
-        Start writing
+        Start noting
         <ArrowRight className='h-4 w-4 ml-2' />{' '}
       </Button>
     </div>
