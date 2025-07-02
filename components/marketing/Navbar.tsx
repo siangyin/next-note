@@ -9,8 +9,8 @@ import { useScrollTop } from '@/hooks/use-scroll-top'
 
 import { Button } from '@/components/ui/button'
 import { Logo } from './Logo'
-import ModeToggle from '@/components/common/ModeToggle'
-import Spinner from '@/components/common/Spinner'
+import ModeToggle from '@/components/ModeToggle'
+import Spinner from '@/components/Spinner'
 
 const Navbar = () => {
   const scrolled = useScrollTop()
