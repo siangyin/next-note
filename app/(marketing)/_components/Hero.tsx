@@ -1,12 +1,12 @@
 import Image from 'next/image'
 
-export const Heroes = () => {
+export const Hero = () => {
   return (
     <div className='flex flex-col items-center justify-center max-w-5xl'>
       <div className='flex items-center'>
-        <div className='relative w-[300px] h-[300px] sm:w-[350px] sm:h-[350px] md:h-[400px] md:w-[400px]'>
+        <div className='relative w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] md:block'>
           <Image
-            src='/note-taking-color.png'
+            src='/drawing.png'
             fill
             className='object-contain'
             alt='document'

@@ -10,7 +10,7 @@ export const Heading = () => {
         Capture Ideas & Clear Your Mind.
       </h1>
       <h3 className='text-base sm:text-xl md:text-2xl font-medium'>
-        <span className='underline'>Next Note</span> offers a minimalist,
+        <span className='underline'>Next note</span> offers a minimalist,
         distraction-free environment to help you stay focused and organized —
         without clutter or complexity distractions. <br />
         Just you and your notes.
