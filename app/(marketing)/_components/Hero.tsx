@@ -8,13 +8,7 @@ export const Hero = () => {
           <Image
             src='/drawing.png'
             fill
-            className='object-contain dark:hidden'
-            alt='document'
-          />
-          <Image
-            src='/drawing-dark.png'
-            fill
-            className='object-contain hidden dark:block'
+            className='object-contain'
             alt='document'
           />
         </div>
