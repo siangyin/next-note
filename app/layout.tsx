@@ -5,6 +5,7 @@ import './globals.css'
 
 import React from 'react'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
+import { ConvexClientProvider } from '@/components/providers/ConvexClientProvider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -46,15 +47,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='system'
-          enableSystem
-          disableTransitionOnChange
-          storageKey='next-note-theme'
-        >
-          {children}
-        </ThemeProvider>
+        <ConvexClientProvider>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='system'
+            enableSystem
+            disableTransitionOnChange
+            storageKey='next-note-theme'
+          >
+            {children}
+          </ThemeProvider>
+        </ConvexClientProvider>
       </body>
     </html>
   )
