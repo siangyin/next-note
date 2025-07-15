@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { ChevronsLeft, MenuIcon } from 'lucide-react'
 import { useMediaQuery } from 'usehooks-ts'
 import { usePathname } from 'next/navigation'
+import UserItem from './UserItem'
 
 const DURATION_300 = 300
 
@@ -110,7 +111,7 @@ const Navigation = () => {
         </div>
 
         <div>
-          <span>Action items</span>
+          <UserItem />
         </div>
 
         <div className='mt-4'>
