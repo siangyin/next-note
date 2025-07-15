@@ -1,37 +1,29 @@
-import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import React from "react"
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import { Toaster } from "sonner"
+import { ThemeProvider } from "@/components/providers/ThemeProvider"
+import { ConvexClientProvider } from "@/components/providers/ConvexClientProvider"
 
-import './globals.css'
+import "./globals.css"
 
-import React from 'react'
-import { ThemeProvider } from '@/components/providers/ThemeProvider'
-import { ConvexClientProvider } from '@/components/providers/ConvexClientProvider'
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: 'Next note',
+  title: "Next note",
   description:
-    'Next note is a simple and clean note-taking app that helps you capture thoughts, ideas, and to-dos — all in one place.',
+    "Next note is a simple and clean note-taking app that helps you capture thoughts, ideas, and to-dos — all in one place.",
   icons: {
     icon: [
       {
-        media: '(prefers-color-scheme: light)',
-        url: '/logo.svg',
-        href: '/logo.svg',
+        media: "(prefers-color-scheme: light)",
+        url: "/logo.svg",
+        href: "/logo.svg",
       },
       {
-        media: '(prefers-color-scheme: dark)',
-        url: '/logo-dark.svg',
-        href: '/logo-dark.svg',
+        media: "(prefers-color-scheme: dark)",
+        url: "/logo-dark.svg",
+        href: "/logo-dark.svg",
       },
     ],
   },
@@ -43,18 +35,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang='en' suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
         <ConvexClientProvider>
           <ThemeProvider
-            attribute='class'
-            defaultTheme='system'
+            attribute="class"
+            defaultTheme="system"
             enableSystem
             disableTransitionOnChange
-            storageKey='next-note-theme'
+            storageKey="next-note-theme"
           >
+            <Toaster position="bottom-center" />
             {children}
           </ThemeProvider>
         </ConvexClientProvider>
