@@ -1,9 +1,28 @@
 "use client"
 
+import { useRouter } from "next/navigation"
+import { useUser } from "@clerk/clerk-react"
+import { useMutation } from "convex/react"
+import { api } from "@/convex/_generated/api"
 import { Id } from "@/convex/_generated/dataModel"
+
+import { toast } from "sonner"
+import {
+  ChevronDown,
+  ChevronRight,
+  MoreHorizontal,
+  Plus,
+  Trash,
+} from "lucide-react"
+import { Skeleton } from "@/components/ui/skeleton"
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
-import { ChevronDown, ChevronRight } from "lucide-react"
-import { Skeleton } from "../ui/skeleton"
 
 interface ItemProps {
   onClick?: () => void
@@ -33,12 +52,47 @@ const Item: React.FC<ItemProps> = (props: ItemProps) => {
   } = props
 
   const isWindows = /Windows/.test(navigator.userAgent)
-  console.log("==>>>", navigator.userAgent, isWindows)
+  const { user } = useUser()
+  const router = useRouter()
+  const create = useMutation(api.documents.create)
+  const archive = useMutation(api.documents.archive)
+
   const ChevronIcon = expanded ? ChevronDown : ChevronRight
 
   const handleExpand = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation()
     onExpand?.()
+  }
+
+  const onCreate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation()
+    if (!id) return
+    const promise = create({ title: "Untitled", parentDocument: id }).then(
+      (documentId) => {
+        if (!expanded) {
+          onExpand?.()
+        }
+        router.push(`/documents/${documentId}`)
+      }
+    )
+
+    toast.promise(promise, {
+      loading: "Creating a new note...",
+      success: "New note created!",
+      error: "Failed to create a new note",
+    })
+  }
+
+  const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation()
+    if (!id) return
+    const promise = archive({ id }).then(() => router.push("/documents"))
+
+    toast.promise(promise, {
+      loading: "Moving to trash...",
+      success: "Note moved to trash!",
+      error: "Failed to archive note",
+    })
   }
 
   return (
@@ -77,6 +131,46 @@ const Item: React.FC<ItemProps> = (props: ItemProps) => {
         >
           <span className="text-xs">{isWindows ? "CTRL" : "⌘"}</span>K
         </kbd>
+      )}
+
+      {!!id && (
+        <div className="ml-auto flex items-center gap-x-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+              <div
+                className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm
+              hover:bg-neutral-300 dark:hover:bg-neutral-600"
+                role="button"
+              >
+                <MoreHorizontal className="w-4 h-4 text-muted-foreground" />
+              </div>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent
+              className="w-60"
+              align="start"
+              side="right"
+              forceMount
+            >
+              <DropdownMenuItem onClick={onArchive}>
+                <Trash className="w-4 h-4 mr-2" />
+                Delete
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <div className="text-xs text-muted-foreground p-2">
+                Last edited by: {user?.fullName}
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <div
+            className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
+            role="button"
+            onClick={onCreate}
+          >
+            <Plus className="w-4 h-4 text-muted-foreground" />
+          </div>
+        </div>
       )}
     </div>
   )
