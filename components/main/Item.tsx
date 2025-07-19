@@ -138,9 +138,9 @@ const Item: React.FC<ItemProps> = (props: ItemProps) => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
               <div
+                role="button"
                 className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm
               hover:bg-neutral-300 dark:hover:bg-neutral-600"
-                role="button"
               >
                 <MoreHorizontal className="w-4 h-4 text-muted-foreground" />
               </div>
@@ -164,9 +164,9 @@ const Item: React.FC<ItemProps> = (props: ItemProps) => {
           </DropdownMenu>
 
           <div
-            className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
             role="button"
             onClick={onCreate}
+            className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
           >
             <Plus className="w-4 h-4 text-muted-foreground" />
           </div>
