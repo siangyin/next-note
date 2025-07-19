@@ -21,8 +21,8 @@ const TrashBox = () => {
 
   const [search, setSearch] = useState("")
 
-  const filteredDocuments = documents?.filter((document) => {
-    return document.title.toLowerCase().includes(search.toLocaleLowerCase())
+  const filteredDocuments = documents?.filter((doc) => {
+    return doc.title.toLowerCase().includes(search.toLocaleLowerCase())
   })
 
   const onClick = (documentId: string) => {
@@ -80,27 +80,27 @@ const TrashBox = () => {
         <p className="hidden last:block text-xs text-center text-muted-foreground pb-2">
           No documents found
         </p>
-        {filteredDocuments?.map((document) => (
+        {filteredDocuments?.map((doc) => (
           <div
             className="text-sm rounded-sm w-full hover:bg-primary/5 flex justify-between items-center text-primary"
-            key={document._id}
+            key={doc._id}
             role="button"
-            onClick={() => onClick(document._id)}
+            onClick={() => onClick(doc._id)}
           >
-            <span className="truncate pl-2">{document.title}</span>
+            <span className="truncate pl-2">{doc.title}</span>
             <div className="flex items-center">
               <div
+                onClick={(e) => onRestore(e, doc._id)}
                 className="rounded-sm p-2 hover:bg-neutral-200 
           dark:hover:bg-neutral-600"
-                onClick={(e) => onRestore(e, document._id)}
               >
                 <Undo className="w-4 h-4 text-muted-foreground" />
               </div>
-              <ConfirmModal onConfirm={() => onRemove(document._id)}>
+              <ConfirmModal onConfirm={() => onRemove(doc._id)}>
                 <div
+                  role="button"
                   className="rounded-sm p-2 hover:bg-neutral-200
             dark:hover:bg-neutral-600"
-                  role="button"
                 >
                   <Trash className="w-4 h-4 text-muted-foreground" />
                 </div>
