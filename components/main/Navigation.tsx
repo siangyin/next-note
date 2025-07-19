@@ -1,7 +1,13 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
-import { ChevronsLeft, MenuIcon, PlusCircle } from "lucide-react"
+import {
+  ChevronsLeft,
+  MenuIcon,
+  PlusCircle,
+  Search,
+  Settings,
+} from "lucide-react"
 import { toast } from "sonner"
 
 import { useMutation } from "convex/react"
@@ -13,6 +19,7 @@ import { api } from "@/convex/_generated/api"
 
 import UserItem from "./UserItem"
 import Item from "./Item"
+import DocumentList from "./DocumentList"
 
 const DURATION_300 = 300
 
@@ -134,11 +141,22 @@ const Navigation = () => {
 
         <div>
           <UserItem />
-          <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
+          <Item
+            label="Search"
+            icon={Search}
+            isSearch
+            onClick={(): void => console.log("==>>> search")}
+          />
+          <Item
+            label="Settings"
+            icon={Settings}
+            onClick={(): void => console.log("==>>> Settings")}
+          />
+          <Item label="New page" icon={PlusCircle} onClick={handleCreate} />
         </div>
 
         <div className="mt-4">
-          <span>Documents</span>
+          <DocumentList />
         </div>
 
         <div
