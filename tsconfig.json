@@ -18,8 +18,9 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".", // root of your project
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"] // this lets "@/components" point to root-level folders
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -2,11 +2,18 @@
 
 import { useCallback, useEffect, useRef, useState } from "react"
 import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover"
+import {
   ChevronsLeft,
   MenuIcon,
+  Plus,
   PlusCircle,
   Search,
   Settings,
+  Trash,
 } from "lucide-react"
 import { toast } from "sonner"
 
@@ -17,9 +24,10 @@ import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { api } from "@/convex/_generated/api"
 
-import UserItem from "./UserItem"
-import Item from "./Item"
-import DocumentList from "./DocumentList"
+import UserItem from "@/components/main/UserItem"
+import Item from "@/components/main/Item"
+import DocumentList from "@/components/main/DocumentList"
+import TrashBox from "@/components/main/TrashBox"
 
 const DURATION_300 = 300
 
@@ -122,7 +130,7 @@ const Navigation = () => {
       <aside
         ref={sidebarRef}
         className={cn(
-          `group/sidebar h-full bg-secondary overflow-y-auto relative flex flex-col w-60 z-[99]`,
+          `group/sidebar h-full bg-neutral-50 overflow-y-auto relative flex flex-col w-60 z-[99]`,
           isResetting && `transition-all ease-in-out duration-${DURATION_300}`,
           isMobile && "w-0"
         )}
@@ -157,6 +165,23 @@ const Navigation = () => {
 
         <div className="mt-4">
           <DocumentList />
+          <Item
+            label="Add new page"
+            icon={Plus}
+            isSearch
+            onClick={handleCreate}
+          />
+          <Popover>
+            <PopoverTrigger className="w-full mt-4">
+              <Item label="Trash" icon={Trash} />
+            </PopoverTrigger>
+            <PopoverContent
+              className="p-0 w-72 "
+              side={isMobile ? "bottom" : "right"}
+            >
+              <TrashBox />
+            </PopoverContent>
+          </Popover>
         </div>
 
         <div
