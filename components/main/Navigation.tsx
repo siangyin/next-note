@@ -1,11 +1,18 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
-import { cn } from "@/lib/utils"
-import { ChevronsLeft, MenuIcon } from "lucide-react"
+import { ChevronsLeft, MenuIcon, PlusCircle } from "lucide-react"
+import { toast } from "sonner"
+
+import { useMutation } from "convex/react"
 import { useMediaQuery } from "usehooks-ts"
 import { usePathname } from "next/navigation"
+
+import { cn } from "@/lib/utils"
+import { api } from "@/convex/_generated/api"
+
 import UserItem from "./UserItem"
+import Item from "./Item"
 
 const DURATION_300 = 300
 
@@ -13,6 +20,8 @@ const Navigation = () => {
   const pathname = usePathname()
 
   const isMobile = useMediaQuery("(max-width:768px)")
+  // const documents = useQuery(api.documents.get)
+  const create = useMutation(api.documents.create)
 
   const isResizingRef = useRef(false)
   const sidebarRef = useRef<HTMLElement>(null)
@@ -80,6 +89,19 @@ const Navigation = () => {
     }
   }
 
+  const handleCreate = async () => {
+    const promise = create({ title: "Untitled" }).then((documentId) =>
+      // router.push(`/documents/${documentId}`)
+      console.log(`Created document with ID: ${documentId}`)
+    )
+
+    toast.promise(promise, {
+      loading: "Creating new note...",
+      success: "New note created!",
+      error: "Failed to create note.",
+    })
+  }
+
   useEffect(() => {
     if (isMobile) {
       collapse()
@@ -112,6 +134,7 @@ const Navigation = () => {
 
         <div>
           <UserItem />
+          <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
         </div>
 
         <div className="mt-4">
