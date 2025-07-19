@@ -182,8 +182,8 @@ export function ItemSkeleton({ level }: { level?: number }) {
       className="flex gap-x-2 py-[3px]"
       style={{ paddingLeft: level ? `${level * 12 + 25}px` : "12px" }}
     >
-      <Skeleton className="h-4 w-4 bg-neutral-300 rounded-full" />
-      <Skeleton className="h-4 w-[80px] bg-neutral-300 rounded-full" />
+      <Skeleton className="h-4 w-4 bg-neutral-300 dark:bg-muted rounded-full" />
+      <Skeleton className="h-4 w-[80px] bg-neutral-300 dark:bg-muted rounded-full" />
     </div>
   )
 }

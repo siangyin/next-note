@@ -20,6 +20,8 @@ import { toast } from "sonner"
 import { useMutation } from "convex/react"
 import { useMediaQuery } from "usehooks-ts"
 import { usePathname } from "next/navigation"
+import { useSearch } from "@/hooks/use-search"
+import { useSettings } from "@/hooks/use-settings"
 
 import { cn } from "@/lib/utils"
 import { api } from "@/convex/_generated/api"
@@ -35,7 +37,8 @@ const Navigation = () => {
   const pathname = usePathname()
 
   const isMobile = useMediaQuery("(max-width:768px)")
-  // const documents = useQuery(api.documents.get)
+  const search = useSearch()
+  const settings = useSettings()
   const create = useMutation(api.documents.create)
 
   const isResizingRef = useRef(false)
@@ -130,7 +133,7 @@ const Navigation = () => {
       <aside
         ref={sidebarRef}
         className={cn(
-          `group/sidebar h-full bg-neutral-50 overflow-y-auto relative flex flex-col w-60 z-[99]`,
+          `group/sidebar h-full bg-neutral-50  dark:bg-background overflow-y-auto relative flex flex-col w-60 z-[99]`,
           isResetting && `transition-all ease-in-out duration-${DURATION_300}`,
           isMobile && "w-0"
         )}
@@ -149,17 +152,8 @@ const Navigation = () => {
 
         <div>
           <UserItem />
-          <Item
-            label="Search"
-            icon={Search}
-            isSearch
-            onClick={(): void => console.log("==>>> search")}
-          />
-          <Item
-            label="Settings"
-            icon={Settings}
-            onClick={(): void => console.log("==>>> Settings")}
-          />
+          <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
+          <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
           <Item label="New page" icon={PlusCircle} onClick={handleCreate} />
         </div>
 
