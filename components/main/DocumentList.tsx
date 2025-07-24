@@ -44,7 +44,7 @@ const DocumentList = (props: DocumentListProps) => {
     router.push(`/documents/${documentId}`)
   }
 
-  console.log("==>>> documents", { documents, expanded })
+  // console.log("==>>> documents", { documents, expanded })
 
   if (documents === undefined) {
     return (

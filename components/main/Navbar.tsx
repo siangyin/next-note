@@ -2,12 +2,14 @@
 
 import { useParams } from "next/navigation"
 import { useQuery } from "convex/react"
-import { MenuIcon } from "lucide-react"
+import { Menu } from "lucide-react"
 
 import { api } from "@/convex/_generated/api"
 import { Id } from "@/convex/_generated/dataModel"
 import Title from "@/components/main/Title"
-import Banner from "@/components/main/Banner"
+import ArchivedBanner from "@/components/main/ArchivedBanner"
+import Publish from "@/components/main/Publish"
+import DocMenu from "@/components/main/DocMenu"
 
 interface NavbarProps {
   isCollapsed: boolean
@@ -30,7 +32,7 @@ const Navbar = (props: NavbarProps) => {
       >
         <Title.Skeleton />
         <div className="flex gap-x-2 items-center">
-          {/* <Menu.Skeleton /> */}
+          <DocMenu.Skeleton />
         </div>
       </nav>
     )
@@ -47,7 +49,7 @@ const Navbar = (props: NavbarProps) => {
       flex gap-x-4 items-center"
       >
         {isCollapsed && (
-          <MenuIcon
+          <Menu
             role="button"
             onClick={onResetWidth}
             className="w-6 h-6 text-muted-foreground"
@@ -55,11 +57,16 @@ const Navbar = (props: NavbarProps) => {
         )}
         <div className="flex justify-between items-center w-full">
           <Title initialData={document} />
-          <div className="flex gap-x-2 items-center"></div>
+          {!document?.isArchived && (
+            <div className="flex gap-x-2 items-center">
+              <Publish initialData={document} />
+              <DocMenu documentId={document._id} />
+            </div>
+          )}
         </div>
       </nav>
 
-      {document.isArchived && <Banner documentId={document._id} />}
+      {document.isArchived && <ArchivedBanner documentId={document._id} />}
     </>
   )
 }

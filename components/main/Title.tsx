@@ -24,17 +24,28 @@ const Title = (props: TitleProps) => {
   const [title, setTitle] = useState(initialData.title || "Untitled")
   const [isEditing, setIsEditing] = useState(false)
 
+  const enableInput = () => {
+    setTitle(initialData.title)
+    setIsEditing(true)
+    setTimeout(() => {
+      inputRef.current?.focus()
+      inputRef.current?.setSelectionRange(0, inputRef.current.value.length)
+    }, 0)
+  }
+
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value)
-
-    update({
-      id: initialData._id,
-      title: event.target.value || "Untitled",
-    })
   }
 
   const disableInput = () => {
     setIsEditing(false)
+
+    if (title !== initialData.title) {
+      update({
+        id: initialData._id,
+        title: title || "Untitled",
+      })
+    }
   }
 
   const onKeyDown = (
@@ -55,8 +66,8 @@ const Title = (props: TitleProps) => {
         <Input
           className="h-7 px-2 focus-visible:ring-transparent"
           ref={inputRef}
-          onClick={disableInput}
-          onBlur={() => setIsEditing(false)}
+          onClick={enableInput}
+          onBlur={disableInput}
           value={title}
           onChange={onChange}
           onKeyDown={onKeyDown}
@@ -66,14 +77,9 @@ const Title = (props: TitleProps) => {
           className="font-normal h-auto p-1"
           variant="ghost"
           size="sm"
-          onKeyDown={onKeyDown}
-          onClick={(): void => {
-            // if (event.key === "Enter") {
-            console.log("==>>> clicked to disableInput")
-            // }
-          }}
+          onClick={enableInput}
         >
-          <span className="truncate">{initialData?.title}</span>
+          <span className="truncate">{title}</span>
         </Button>
       )}
     </div>
