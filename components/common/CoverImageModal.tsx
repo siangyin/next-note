@@ -15,9 +15,9 @@ import { SingleImageDropzone } from "@/components/common/SingleImageDropzone"
 const CoverImageModal = () => {
   const params = useParams()
   const update = useMutation(api.documents.update)
-
   const coverImage = useConverImage()
   const { edgestore } = useEdgeStore()
+
   const [file, setFile] = useState<File>()
   const [isSubmitting, setIsSubmitting] = useState(false)
 
