@@ -23,7 +23,7 @@ const DocCover = (props: CoverProps) => {
   const { url, preview } = props
   const params = useParams()
 
-  const coverIamge = useConverImage()
+  const coverImage = useConverImage()
   const { edgestore } = useEdgeStore()
   const removeCoverImage = useMutation(api.documents.removeCoverImage)
 
@@ -53,7 +53,7 @@ const DocCover = (props: CoverProps) => {
             className="text-muted-foreground text-xs"
             variant="outline"
             size="sm"
-            onClick={() => coverIamge.onReplace(url)}
+            onClick={() => coverImage.onReplace(url)}
           >
             <ImageIcon className="w-4 h-4 mr-2" />
             Change Cover
