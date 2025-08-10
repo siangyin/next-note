@@ -1,6 +1,6 @@
-import { Footer } from "../../components/marketing/Footer"
-import { Header } from "../../components/marketing/Header"
-import { Hero } from "../../components/marketing/Hero"
+import { Footer } from "@/components/marketing/Footer"
+import { Header } from "@/components/marketing/Header"
+import { Hero } from "@/components/marketing/Hero"
 
 const MarketingPage = () => {
   return (
