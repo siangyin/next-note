@@ -32,15 +32,15 @@ const DocumentsPage = () => {
         className="dark:hidden"
         src="/empty.png"
         alt="Empty"
-        width="300"
-        height="300"
+        width={300}
+        height={300}
       />
       <Image
         className="hidden dark:block"
         src="/empty-dark.png"
         alt="Empty"
-        width="300"
-        height="300"
+        width={300}
+        height={300}
       />
 
       <h2 className="text-lg font-medium">

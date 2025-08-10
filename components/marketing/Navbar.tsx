@@ -44,7 +44,7 @@ const Navbar = () => {
             <Button variant="ghost" size="sm" asChild>
               <Link href="/documents">Enter Next note</Link>
             </Button>
-            <UserButton />
+            <UserButton afterSignOutUrl="/" />
           </>
         )}
 
