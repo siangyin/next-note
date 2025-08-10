@@ -12,7 +12,7 @@ import { EdgeStoreProvider } from "@/lib/edgestore"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Next note",
+  title: process.env.NEXT_PUBLIC_APP_NAME ?? "Next Note",
   description:
     "Next note is a simple and clean note-taking app that helps you capture thoughts, ideas, and to-dos — all in one place.",
   icons: {
