@@ -1,6 +1,6 @@
 "use client"
 
-// import { useMemo } from "react"
+import { useRef } from "react"
 import { useParams } from "next/navigation"
 import { useMutation, useQuery } from "convex/react"
 
@@ -12,27 +12,35 @@ import DocCover from "@/components/document/DocCover"
 import DocToolBar from "@/components/document/DocToolBar"
 import DocEditor from "@/components/document/DocEditor"
 
-// interface DocumentIdPageProps {
-//   params: {
-//     documentId: Id<"documents">
-//   }
-// }
-
 const DocumentIdPage = () => {
   const { documentId } = useParams<{ documentId: Id<"documents"> }>()
-  console.log("==>>>", documentId)
 
-  const document = useQuery(api.documents.getById, {
-    documentId: documentId,
-  })
-
+  const document = useQuery(api.documents.getById, { documentId })
   const update = useMutation(api.documents.update)
 
+  console.log("==>>> document", document)
+
+  const saveTimer = useRef<number | null>(null)
+  const lastSaved = useRef<string | null>(null)
+
+  // const onChange = (content: string) => {
+  //   update({
+  //     id: documentId,
+  //     content,
+  //   })
+  // }
+
   const onChange = (content: string) => {
-    update({
-      id: documentId,
-      content,
-    })
+    // Avoid writing identical content repeatedly
+    if (lastSaved.current === content) return
+
+    if (saveTimer.current) {
+      window.clearTimeout(saveTimer.current)
+    }
+    saveTimer.current = window.setTimeout(async () => {
+      lastSaved.current = content
+      await update({ id: documentId, content })
+    }, 800) // 800–1200ms feels nice
   }
 
   if (document === undefined) {
@@ -60,7 +68,11 @@ const DocumentIdPage = () => {
       <DocCover url={document.coverImage} />
       <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
         <DocToolBar initialData={document} />
-        <DocEditor onChange={onChange} initialContent={document.content} />
+        <DocEditor
+          onChange={onChange}
+          initialContent={document.content}
+          docKey={documentId}
+        />
       </div>
     </div>
   )

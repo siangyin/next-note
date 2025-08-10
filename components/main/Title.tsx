@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useMutation } from "convex/react"
 
 import { api } from "@/convex/_generated/api"
@@ -23,6 +23,12 @@ const Title = (props: TitleProps) => {
 
   const [title, setTitle] = useState(initialData.title || "Untitled")
   const [isEditing, setIsEditing] = useState(false)
+
+  useEffect(() => {
+    if (!isEditing) {
+      setTitle(initialData.title || "Untitled")
+    }
+  }, [initialData._id, initialData.title, isEditing])
 
   const enableInput = () => {
     setTitle(initialData.title)

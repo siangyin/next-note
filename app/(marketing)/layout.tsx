@@ -1,4 +1,4 @@
-import Navbar from '../../components/marketing/Navbar'
+import Navbar from "../../components/marketing/Navbar"
 
 export default function MarketingLayout({
   children,
@@ -6,9 +6,9 @@ export default function MarketingLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className='h-full dark:bg-[#1F1F1F]'>
+    <div className="h-full dark:bg-[#1F1F1F]">
       <Navbar />
-      <main className='h-full pt-40'>{children}</main>
+      <main className="h-full pt-40">{children}</main>
     </div>
   )
 }

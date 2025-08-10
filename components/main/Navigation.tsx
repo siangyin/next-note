@@ -19,7 +19,7 @@ import { toast } from "sonner"
 
 import { useMutation } from "convex/react"
 import { useMediaQuery } from "usehooks-ts"
-import { useParams, usePathname } from "next/navigation"
+import { useParams, usePathname, useRouter } from "next/navigation"
 import { useSearch } from "@/hooks/use-search"
 import { useSettings } from "@/hooks/use-settings"
 
@@ -37,6 +37,7 @@ const DURATION_300 = 300
 const Navigation = () => {
   const pathname = usePathname()
   const params = useParams()
+  const router = useRouter()
   const isMobile = useMediaQuery("(max-width:768px)")
   const search = useSearch()
   const settings = useSettings()
@@ -110,8 +111,7 @@ const Navigation = () => {
 
   const handleCreate = async () => {
     const promise = create({ title: "Untitled" }).then((documentId) =>
-      // router.push(`/documents/${documentId}`)
-      console.log(`Created document with ID: ${documentId}`)
+      router.push(`/documents/${documentId}`)
     )
 
     toast.promise(promise, {
