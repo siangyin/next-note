@@ -72,10 +72,11 @@ const DocumentIdPage = () => {
 
   return (
     <div className="pb-40">
-      <DocCover url={document.coverImage} />
+      <DocCover preview url={document.coverImage} />
       <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
-        <DocToolBar initialData={document} />
+        <DocToolBar preview initialData={document} />
         <Editor
+          editable={false}
           onChange={onChange}
           initialContent={document.content}
           docKey={documentId}
