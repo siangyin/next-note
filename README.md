@@ -39,6 +39,9 @@ A clean note‑taking app (Notion‑style) built with **Next.js 15**, **Convex**
 ---
 ## Screenshots
 
+
+**Demo:** [▶ Watch demo on YouTube](https://youtube.com/watch?v=scII93rv0uY)
+
 Home <img width="1460" height="1186" alt="Screenshot 2025-08-10 at 9 45 33 PM" src="https://github.com/user-attachments/assets/fb9fa633-a908-4d4e-be38-05d201ea7626" />
 <img width="1461" height="1189" alt="Screenshot 2025-08-10 at 9 45 25 PM" src="https://github.com/user-attachments/assets/c4419c03-aa14-4779-9ed8-09d3b8807157" />
 
@@ -47,6 +50,7 @@ Documents
 <img width="1428" height="1100" alt="Screenshot 2025-08-10 at 9 45 11 PM" src="https://github.com/user-attachments/assets/fd14fd67-13e7-441d-a22f-6c8d13daf294" />
 <img width="1428" height="1103" alt="Screenshot 2025-08-10 at 9 44 43 PM" src="https://github.com/user-attachments/assets/53da711d-8c24-4f7a-8cd5-218d52842aba" />
 <img width="1420" height="1103" alt="Screenshot 2025-08-10 at 9 44 16 PM" src="https://github.com/user-attachments/assets/c8b3505e-2b8b-4dc1-9e78-eefc11b481dd" />
+
 
 
 
