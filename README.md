@@ -2,7 +2,7 @@
 
 A clean note‑taking app (Notion‑style) built with **Next.js 15**, **Convex**, **Clerk**, **EdgeStore**, and **Tailwind/shadcn**.
 
-**Live:** https://next-note-app-pied.vercel.app/  
+**Live:** [https://next-note-app-2025.vercel.app/] (https://next-note-app-2025.vercel.app/) 
 **Repo:** https://github.com/siangyin/next-note
 
 
