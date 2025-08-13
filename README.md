@@ -109,12 +109,6 @@ EDGE_STORE_ACCESS_KEY=XXXX
 EDGE_STORE_SECRET_KEY=XXXX
 ```
 
-If your Convex auth uses Clerk JWTs, add `convex/.env.local`:
-
-```env
-CLERK_ISSUER_URL=https://<your-clerk-issuer-url>
-```
-
 ### 4) Run locally
 
 Open two terminals:
